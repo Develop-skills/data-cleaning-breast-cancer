@@ -66,3 +66,14 @@ python data_cleaning_pipeline.py
 ## 📁 Output
 
 Produces `final_preprocessed_dataset.csv` — a fully cleaned and scaled dataset ready for exploratory analysis or model building.
+## 📁 Project Files
+
+- `data_cleaning_pipeline.py` — Week 1: Data acquisition, cleaning & preprocessing
+- `eda_visualization.py` — Week 2: Exploratory data analysis & visualization (builds on Week 1's cleaned dataset)
+
+## 📈 Week 2 — Key Findings
+
+- Identified top features separating malignant vs benign cases using statistical effect size (Cohen's d) and t-tests
+- `worst concave points` and `worst perimeter` showed the strongest separation (Cohen's d > 2.3)
+- Found that patients above the median `worst concave points` value are malignant 71.5% of the time, vs only 3.2% below median
+- Detected a real anomaly: a visible imputation artifact from Week 1's cleaning step, showing up as an unnatural cluster of points in a scatter plot — a concrete example of how preprocessing choices affect downstream analysis
