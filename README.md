@@ -77,3 +77,11 @@ Produces `final_preprocessed_dataset.csv` — a fully cleaned and scaled dataset
 - `worst concave points` and `worst perimeter` showed the strongest separation (Cohen's d > 2.3)
 - Found that patients above the median `worst concave points` value are malignant 71.5% of the time, vs only 3.2% below median
 - Detected a real anomaly: a visible imputation artifact from Week 1's cleaning step, showing up as an unnatural cluster of points in a scatter plot — a concrete example of how preprocessing choices affect downstream analysis
+- `clustering_analysis.py` — Week 3: Unsupervised learning & clustering (K-Means + Hierarchical)
+
+## 🔍 Week 3 — Key Findings
+
+- Investigated a counterintuitive result: unscaled clustering scored higher on silhouette, but only because it was dominated by one high-variance feature
+- Objectively selected k=2 using elbow method + silhouette analysis across k=2 to k=8
+- Unsupervised clusters matched real diagnosis labels ~90% of the time (Adjusted Rand Index = 0.65), despite never seeing the labels
+- Cross-validated K-Means results against Hierarchical Clustering (Ward linkage) — both methods agreed closely
