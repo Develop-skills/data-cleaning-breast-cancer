@@ -2,7 +2,7 @@
 Exploratory Data Analysis and Visualization
 Dataset: Breast Cancer Wisconsin (Diagnostic) Dataset (UCI ML Repository, via sklearn)
 Uses the cleaned dataset produced by the Week 1 data_cleaning_pipeline.py
-Author: Utkarsh
+Author: Rajkumar Yadav
 """
 
 import pandas as pd
