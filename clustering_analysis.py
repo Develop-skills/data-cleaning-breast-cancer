@@ -2,7 +2,7 @@
 Unsupervised Learning and Clustering Analysis
 Dataset: Breast Cancer Wisconsin (Diagnostic) Dataset (UCI ML Repository, via sklearn)
 Uses the cleaned dataset produced by Week 1's data_cleaning_pipeline.py
-Author: Utkarsh
+Author: Rajkumar Yadav
 """
 
 import pandas as pd
