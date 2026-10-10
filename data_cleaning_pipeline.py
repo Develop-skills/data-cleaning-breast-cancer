@@ -1,7 +1,7 @@
 """
 Data Acquisition, Cleaning, and Preprocessing
 Dataset: Breast Cancer Wisconsin (Diagnostic) Dataset (UCI ML Repository, via sklearn)
-Author: Utkarsh
+Author: Rajkumar Yadav
 """
 
 import pandas as pd
