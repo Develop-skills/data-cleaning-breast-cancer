@@ -93,6 +93,10 @@ print("Shape:", clean.shape)
 print("Missing values:", clean.isnull().sum().sum())
 print("Duplicates:", clean.duplicated().sum())
 
+# Save the cleaned (UNSCALED) dataset - used by Weeks 2, 3 and 4
+clean.to_csv("cleaned_dataset.csv", index=False)
+print("Saved cleaned_dataset.csv (unscaled)")
+
 # ============================================================
 # STEP 5: FEATURE SCALING
 # ============================================================
