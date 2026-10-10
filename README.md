@@ -105,8 +105,11 @@ Each script builds on the cleaned dataset from Week 1, so run Week 1 first.
 
 ## 📁 Output
 
-- Week 1 produces `final_preprocessed_dataset.csv` — a fully cleaned and scaled dataset ready for analysis or model building.
-- Week 4 prints the ablation test, model comparison, tuned parameters, held-out test metrics, confusion matrix, ROC-AUC, and the misclassified cases.
+Week 1 produces two files:
+cleaned_dataset.csv — cleaned but unscaled data, used as the input for Weeks 2, 3 and 4 (each of those steps does its own scaling where needed)
+final_preprocessed_dataset.csv — cleaned and standardized data (mean=0, std=1)
+Week 3 produces clustered_dataset.csv (data with K-Means cluster labels) and Week 2 saves its charts as PNG images.
+Week 4 prints the ablation test, model comparison, tuned parameters, held-out test metrics, confusion matrix, ROC-AUC, and the misclassified cases.
 
 ## 📁 Project Files
 
