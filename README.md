@@ -87,13 +87,14 @@ flowchart LR
 
 - Python 3
 - pandas, NumPy
+- SciPy (statistical tests, hierarchical clustering)
 - scikit-learn (dataset, preprocessing, clustering, classification models, `GridSearchCV`, metrics)
 - Matplotlib (visualizations)
 
 ## ▶️ How to Run
 
 ```bash
-pip install pandas numpy scikit-learn matplotlib
+pip install pandas numpy scipy scikit-learn matplotlib
 
 python data_cleaning_pipeline.py   # Week 1 — produces the cleaned dataset
 python eda_visualization.py        # Week 2
@@ -101,15 +102,15 @@ python clustering_analysis.py      # Week 3
 python supervised_model.py         # Week 4
 ```
 
-Each script builds on the cleaned dataset from Week 1, so run Week 1 first.
+Weeks 2–4 read `cleaned_dataset.csv`, so run Week 1 first.
 
 ## 📁 Output
 
-Week 1 produces two files:
-cleaned_dataset.csv — cleaned but unscaled data, used as the input for Weeks 2, 3 and 4 (each of those steps does its own scaling where needed)
-final_preprocessed_dataset.csv — cleaned and standardized data (mean=0, std=1)
-Week 3 produces clustered_dataset.csv (data with K-Means cluster labels) and Week 2 saves its charts as PNG images.
-Week 4 prints the ablation test, model comparison, tuned parameters, held-out test metrics, confusion matrix, ROC-AUC, and the misclassified cases.
+- Week 1 produces two files:
+  - `cleaned_dataset.csv` — cleaned but **unscaled** data, used as the input for Weeks 2, 3 and 4 (each of those steps does its own scaling where needed)
+  - `final_preprocessed_dataset.csv` — cleaned and standardized data (mean=0, std=1)
+- Week 3 produces `clustered_dataset.csv` (data with K-Means cluster labels) and Week 2 saves its charts as PNG images.
+- Week 4 prints the ablation test, model comparison, tuned parameters, held-out test metrics, confusion matrix, ROC-AUC, and the misclassified cases.
 
 ## 📁 Project Files
 
@@ -118,4 +119,3 @@ Week 4 prints the ablation test, model comparison, tuned parameters, held-out te
 - `clustering_analysis.py` — Week 3: Unsupervised learning & clustering (K-Means + Hierarchical)
 - `supervised_model.py` — Week 4: Supervised classification, hyperparameter tuning, held-out evaluation and misclassification analysis
 - `Breast_Cancer_Data_Cleaning_Report.pd.pdf`, `Week2_EDA_Visualization_Rajkumar.pdf`, `Week3_Clustering_Analysis_Rajkumar.docx`, `Week4_Supervised_Learning_Model_Rajkumar.docx` — written reports for each week
-
