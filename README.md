@@ -11,6 +11,7 @@ So far the project covers:
 - Exploring and visualizing the data (Week 2)
 - Finding natural structure with unsupervised clustering (Week 3)
 - Building and evaluating a supervised classification model (Week 4)
+- Designing, training and critically evaluating a neural network (Week 5)
 
 Since the original UCI dataset is already clean, realistic data quality issues (missing values, duplicate rows, sign errors, extreme outliers) were **deliberately and transparently introduced** into a working copy to simulate real-world messiness — a standard practice for demonstrating a complete cleaning pipeline.
 
@@ -22,7 +23,7 @@ Since the original UCI dataset is already clean, realistic data quality issues (
 | 2 | Exploratory data analysis & visualization | `eda_visualization.py` | `Week2_EDA_Visualization_Rajkumar.pdf` | ✅ Done |
 | 3 | Unsupervised learning & clustering | `clustering_analysis.py` | `Week3_Clustering_Analysis_Rajkumar.docx` | ✅ Done |
 | 4 | Supervised learning model implementation | `supervised_model.py` | `Week4_Supervised_Learning_Model_Rajkumar.docx` | ✅ Done |
-| 5 | To be added | — | — | ⏳ Upcoming |
+| 5 | Deep learning application (neural network) | `deep_learning_model.py` | `Week5_Deep_Learning_Application_Rajkumar.docx` | ✅ Done |
 | 6 | To be added | — | — | ⏳ Upcoming |
 
 ## 🔄 Week 1 — Cleaning Pipeline
@@ -83,34 +84,47 @@ flowchart LR
 - Misclassification analysis: 3 errors out of 114 (1 false positive, 2 false negatives). Two of them were *confidently wrong* (predicted malignancy probability of 1.9% and 0.01%), a risk that the headline accuracy hides
 - Planned follow-ups: targeted analysis of the confidently-wrong cases and lowering the decision threshold below 0.5 to favour recall
 
+## 🧠 Week 5 — Key Findings
+
+- Built a neural network classifier in TensorFlow/Keras on the same cleaned dataset, using the same train/test split as Week 4 so the comparison is fair
+- Deliberately trained an unregularized 128-128-64 network (28,801 parameters) to show overfitting: validation loss bottomed out at epoch 7 and then rose to 2.6x its minimum while training loss fell to near zero
+- Controlled overfitting with dropout, L2 regularization and early stopping; chose a compact 32 → 16 architecture (1,537 parameters) by 5-fold cross-validated search over 12 configurations (CV F1 0.9735)
+- **Test results:** Accuracy 98.25% · Precision 100% · Recall 95.24% · F1 97.56% · ROC-AUC 0.9931 (5-seed mean F1 0.978 ± 0.016)
+- Compared with Week 4's Logistic Regression: 2 errors vs 3 on 114 test patients — a difference within seed-to-seed noise, so the network is at least as good as the baseline but not demonstrably better
+- Both models miss the same two malignant patients; Monte Carlo dropout uncertainty flagged one of the two errors
+- Permutation importance showed the network relies on different features (`worst symmetry`, `worst texture`, `worst smoothness`) than Week 2's top-ranked ones
+
 ## 🛠️ Tech Stack
 
 - Python 3
 - pandas, NumPy
 - SciPy (statistical tests, hierarchical clustering)
 - scikit-learn (dataset, preprocessing, clustering, classification models, `GridSearchCV`, metrics)
+- TensorFlow / Keras (neural network)
 - Matplotlib (visualizations)
 
 ## ▶️ How to Run
 
 ```bash
-pip install pandas numpy scipy scikit-learn matplotlib
+pip install pandas numpy scipy scikit-learn matplotlib tensorflow
 
 python data_cleaning_pipeline.py   # Week 1 — produces the cleaned dataset
 python eda_visualization.py        # Week 2
 python clustering_analysis.py      # Week 3
 python supervised_model.py         # Week 4
+python deep_learning_model.py      # Week 5 (about 15 minutes on CPU; the hyperparameter search is the slow part)
 ```
 
-Weeks 2–4 read `cleaned_dataset.csv`, so run Week 1 first.
+Weeks 2–5 read `cleaned_dataset.csv`, so run Week 1 first.
 
 ## 📁 Output
 
 - Week 1 produces two files:
-  - `cleaned_dataset.csv` — cleaned but **unscaled** data, used as the input for Weeks 2, 3 and 4 (each of those steps does its own scaling where needed)
+  - `cleaned_dataset.csv` — cleaned but **unscaled** data, used as the input for Weeks 2–5 (each of those steps does its own scaling where needed)
   - `final_preprocessed_dataset.csv` — cleaned and standardized data (mean=0, std=1)
-- Week 3 produces `clustered_dataset.csv` (data with K-Means cluster labels) and Week 2 saves its charts as PNG images.
+- Week 2 saves its charts as PNG images; Week 3 produces `clustered_dataset.csv` (data with K-Means cluster labels).
 - Week 4 prints the ablation test, model comparison, tuned parameters, held-out test metrics, confusion matrix, ROC-AUC, and the misclassified cases.
+- Week 5 saves the trained model (`breast_cancer_nn.keras`), a results file (`week5_results.json`) and five figures: `fig_architecture.png`, `fig_overfitting.png`, `fig_training_curves.png`, `fig_evaluation.png`, `fig_importance.png`.
 
 ## 📁 Project Files
 
@@ -118,4 +132,6 @@ Weeks 2–4 read `cleaned_dataset.csv`, so run Week 1 first.
 - `eda_visualization.py` — Week 2: Exploratory data analysis & visualization
 - `clustering_analysis.py` — Week 3: Unsupervised learning & clustering (K-Means + Hierarchical)
 - `supervised_model.py` — Week 4: Supervised classification, hyperparameter tuning, held-out evaluation and misclassification analysis
-- `Breast_Cancer_Data_Cleaning_Report.pd.pdf`, `Week2_EDA_Visualization_Rajkumar.pdf`, `Week3_Clustering_Analysis_Rajkumar.docx`, `Week4_Supervised_Learning_Model_Rajkumar.docx` — written reports for each week
+- `deep_learning_model.py` — Week 5: Neural network with overfitting demonstration, hyperparameter search, held-out evaluation, uncertainty and feature-importance analysis
+- `fig_*.png` — Week 5 figures (architecture, overfitting, learning curves, evaluation, feature importance)
+- `Breast_Cancer_Data_Cleaning_Report.pd.pdf`, `Week2_EDA_Visualization_Rajkumar.pdf`, `Week3_Clustering_Analysis_Rajkumar.docx`, `Week4_Supervised_Learning_Model_Rajkumar.docx`, `Week5_Deep_Learning_Application_Rajkumar.docx` — written reports for each week
